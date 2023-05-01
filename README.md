@@ -13,9 +13,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
  En `clientes.module.ts` importamos el servicio `import { ClientesService } from './clientes.service';` y lo declaramos en providers `providers: [ClientesService]`
  6. Creamos componente de alta de clientes `ng generate component clientes/altaCliente`
  7. En el componente recién creado `alta-cliente.component.ts`, agregamos el servicio y lo inyectamos en el constructor `import { ClientesService } from './../clientes.service';` y `constructor(private clientesService: ClientesService) { }`
- 8. En el archivo `clientes.module.ts` importamos `FormsModule` para usar la directiva `ngModel` y lo agrefamos al decorador `imports`
+ 8. En el archivo `clientes.module.ts` importamos `FormsModule` para usar la directiva `ngModel` y lo agregamos al decorador `imports`
  9. En el módulo de clientes `clientes.module.ts` agregamos al `exports` el componente `AltaClienteComponent` para usar desde otros módulos
-10. En el módulo raíz, `app.module.ts`, declaramos que se va a usar el componentes que vienen de `clientes.module.ts`: `import { ClientesModule } from './clientes/clientes.module';`
+10. En el módulo raíz, `app.module.ts`, declaramos que se va a usar el componente que vienen de `clientes.module.ts`: `import { ClientesModule } from './clientes/clientes.module';`
 11. Declaramos el módulo en el array de imports:
 `imports: [
   BrowserModule,
@@ -24,3 +24,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 12. En el archivo `app.component.html` agregamos el tag `<app-alta-cliente></app-alta-cliente>`
 13. Creamos el componente `ng generate component clientes/listadoClientes` y, en forma análoga realizamos los pasos 7, 8, 9, 10, 11 y 12
 14. Finalmente podemos correr nuestro proyecto mediante el comando `ng serve -o`
+
+<div style="text-align:center">
+  <img src="./src/assets/img/img1.png" alt="Imagen de muestra" width="50%">
+</div>
