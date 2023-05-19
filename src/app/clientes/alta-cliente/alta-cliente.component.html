@@ -2,23 +2,25 @@
 <h2>Alta cliente</h2>
 <p>
   <span>Nombre:</span>
-  <input type="text" [(ngModel)]="cliente.nombre">
+  <input type="text" [(ngModel)]="cliente.nombre" placeholder="Nombre">
 </p>
 
 <p>
   <span>CUIT:</span>
-  <input type="text" [(ngModel)]="cliente.cuit">
+  <input type="text" [(ngModel)]="cliente.cuit" placeholder="CUIT">
 </p>
 <p>
   <span>Dirección:</span>
-  <input type="text" [(ngModel)]="cliente.direccion">
+  <input type="text" [(ngModel)]="cliente.direccion" placeholder="Dirección">
 </p>
 <p>
-  <span>Grupo:</span>
-  <select [(ngModel)]="cliente.grupo">
+  <label for="selectGrupo">Grupo: </label>
+  <select id="selectGrupo" [(ngModel)]="cliente.grupo">
     <option *ngFor="let grupo of grupos" value="{{grupo.id}}">{{grupo.nombre}}</option>
   </select>
 </p>
+<!-- <input type="file" (change)="onFileSelected($event)">
+<button (click)="uploadImage()">Subir imagen</button> -->
 <p>
   <button (click)="this.nuevoCliente()">Guardar</button>
 </p>

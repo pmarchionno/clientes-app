@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Cliente, Grupo } from './clientes.model';
+import { Subject } from 'rxjs/internal/Subject';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientesService {
   private clientes: Cliente[];
+  clientesSubject = new Subject<Cliente[]>();
   private grupos: Grupo[];
 
   constructor() {
@@ -39,7 +41,9 @@ export class ClientesService {
   }
 
   addCliente(cliente: Cliente) {
-    this.clientes.push(cliente);
+    //this.clientes.push(cliente);
+    this.clientes = [...this.clientes, cliente]
+    this.clientesSubject.next(this.clientes);
   }
 
   resetDataCliente(): Cliente {
@@ -48,7 +52,8 @@ export class ClientesService {
       nombre: '',
       cuit: '',
       direccion: '',
-      grupo: 0
+      grupo: 0,
+      imagen:'',
     };
   }
 }

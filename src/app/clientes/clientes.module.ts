@@ -4,11 +4,15 @@ import { ClientesService } from './clientes.service';
 import { FormsModule } from '@angular/forms';
 import { AltaClienteComponent } from './alta-cliente/alta-cliente.component';
 import { ListadoClientesComponent } from './listado-clientes/listado-clientes.component';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AltaClienteComponent,
-    ListadoClientesComponent
+    ListadoClientesComponent,
+    FooterComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
@@ -16,7 +20,9 @@ import { ListadoClientesComponent } from './listado-clientes/listado-clientes.co
   ],
   exports: [
     AltaClienteComponent,
-    ListadoClientesComponent
+    ListadoClientesComponent,
+    FooterComponent,
+    HeaderComponent,
   ],
   providers: [
     ClientesService

@@ -4,6 +4,7 @@ export interface Cliente {
     cuit: string;
     direccion: string;
     grupo: number;
+    imagen: string;
   }
   
   export interface Grupo {

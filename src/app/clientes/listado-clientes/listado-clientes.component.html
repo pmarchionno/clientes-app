@@ -3,10 +3,18 @@
   </h2>
   <div *ngIf="! clientes.length">No hay clientes por el momento</div>
   <div>
-    <article *ngFor="let cliente of clientes">
+    <input type="text" clase="form-control" placeholder="Escribir algo aquí" [(ngModel)]="dataInputSearch" (keyup.enter)="searchData()">
+    <button (click)="searchData()">Buscar</button>
+    
+    <article *ngFor="let cliente of clientesData">
+      <!-- <img class="listing-photo" src={{cliente.imagen}} alt="Imagen de {{cliente.nombre}}"> -->
       <span>{{cliente.nombre}}</span>
       <span>{{cliente.cuit}}</span>
       <span>{{cliente.direccion}}</span>
       <span>{{cliente.grupo}}</span>
+      <button (click)="delCliente(cliente)">x</button>
     </article>
+    <button (click)="setOrder()" *ngIf="clientes.length">Ordenar Asc</button>
+    <button (click)="setOrderDesc()" *ngIf="clientes.length">Ordenar Desc</button>
+    <button (click)="setOrderByName()" *ngIf="clientes.length">Ordenar por Nombre</button>
   </div>
