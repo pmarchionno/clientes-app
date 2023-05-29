@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { ClientesModule } from './clientes/clientes.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -12,8 +14,11 @@ import { ClientesModule } from './clientes/clientes.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ClientesModule
+    ClientesModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
+  exports: [ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent]
 })

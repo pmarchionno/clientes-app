@@ -1,11 +1,12 @@
 <!-- <h1>Angular Router App</h1> -->
-<!-- This nav gives you links to click, which tells the router which route to use (defined in the routes constant in  AppRoutingModule) -->
+<!-- This nav gives you links to click, which tells the router which route to use (defined in the routes constant in AppRoutingModule) -->
 <app-header></app-header>
 <section>
     <!-- <nav> -->
     <ul class="nav navbar-nav">
         <!-- <li><a routerLink="/altaCliente" routerLinkActive="active" ariaCurrentWhenActive="page">First Component</a></li> -->
         <li><a (click)="goToAltaCliente()">Nuevo Cliente</a></li>
+        <!-- <li><a [routerLink]="['/', 'altaCliente']">Nuevo Clientes</a></li> -->
         <li><a (click)="goToListadoClientes()">Clientes</a></li>
     </ul>
     <!-- </nav> -->

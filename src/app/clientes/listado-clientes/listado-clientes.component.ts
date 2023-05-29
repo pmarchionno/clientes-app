@@ -20,36 +20,55 @@ export class ListadoClientesComponent implements OnInit {
   constructor(private clientesService: ClientesService) { }//A esto se lo llama inyección de dependencias
 
   ngOnInit() {
-    this.clienteSubscription = this.clientesService.clientesSubject.subscribe(
-      (clientes: Cliente[]) => {
-        this.clientes = clientes;
-        this.clientesData = clientes;
-      }
-      
-    );
-    this.clientes = this.clientesService.getClientes();
-    this.clientesData = this.clientes;
+    if (this.clientesService.getClientes().length <= 0) {
+      this.clientesService.addCliente({
+        nombre: 'Pablo',
+        id: 1,
+        cuit: '111',
+        direccion: 'aaaa',
+        grupo: 1,
+        imagen: '/assets/img/defecto.png'
+      });
+
+      this.clientesService.addCliente({
+        nombre: 'Alberto',
+        id: 2,
+        cuit: '222',
+        direccion: 'bbbb',
+        grupo: 1,
+        imagen: '/assets/img/defecto.png'
+      });
+
+      this.clientesService.addCliente({
+        nombre: 'José',
+        id: 3,
+        cuit: '333',
+        direccion: 'ccc',
+        grupo: 2,
+        imagen: '/assets/img/defecto.png'
+      });
+    }
     this.updateCliente();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['clientes'] && this.clientes) {
-      this.clientesData = this.clientes;
-      this.updateCliente();
-      this.setOrderByName();
-    }
-  }
+  // ngOnChanges(changes: SimpleChanges) {
+  //   if (changes['clientes'] && this.clientes) {
+  //     this.clientesData = this.clientes;
+  //     this.updateCliente();
+  //     this.setOrderByName();
+  //   }
+  // }
 
   ngOnDestroy() {
     if (this.clienteSubscription) {
       this.clienteSubscription.unsubscribe();
     }
   }
-  
+
   public updateCliente() {
     this.clientes = this.clientesService.getClientes();
     this.clientesData = this.clientes;
-    
+
     if (this.ordeByName == 'DESC') {
       this.setOrderDesc()
     } else {
@@ -69,7 +88,7 @@ export class ListadoClientesComponent implements OnInit {
     this.clientes.forEach(el => {
       if (el.nombre.toLocaleLowerCase().includes(this.dataInputSearch.toLocaleLowerCase())) {
         clientesFilter.push(el);
-      }else{
+      } else {
         //No lo tomamos en cuenta
       }
     })
@@ -77,11 +96,11 @@ export class ListadoClientesComponent implements OnInit {
   }
 
   public setOrder() {
-    this.clientesData = this.clientesData.sort((a: Cliente, b: Cliente) => (a.nombre > b.nombre) ? 1 : -1)
+    this.clientesData = this.clientesData.sort((a: Cliente, b: Cliente) => (a.nombre.toLocaleLowerCase() > b.nombre.toLocaleLowerCase()) ? 1 : -1)
   }
 
   public setOrderDesc() {
-    this.clientesData = this.clientesData.sort((a: Cliente, b: Cliente) => (a.nombre > b.nombre) ? -1 : 1)
+    this.clientesData = this.clientesData.sort((a: Cliente, b: Cliente) => (a.nombre.toLocaleLowerCase() > b.nombre.toLocaleLowerCase()) ? -1 : 1)
   }
 
   public setOrderByName() {

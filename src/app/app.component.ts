@@ -16,6 +16,6 @@ export class AppComponent {
   }
 
   goToListadoClientes() {
-    this.router.navigate(['/', 'listadoClientes']);
+    this.router.navigate(['/', '']);
   }
 }

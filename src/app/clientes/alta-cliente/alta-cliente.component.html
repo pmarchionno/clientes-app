@@ -1,26 +1,45 @@
-<p>APP alta Cliente</p>
-<h2>Alta cliente</h2>
-<p>
-  <span>Nombre:</span>
-  <input type="text" [(ngModel)]="cliente.nombre" placeholder="Nombre">
-</p>
+<form [formGroup]="myForm" (ngSubmit)="nuevoCliente()" novalidate>
+  <div class="col-lg">
+    <label for="">Nombre</label>
+    <input formControlName="nombre" type="text" [(ngModel)]="cliente.nombre" placeholder="Nombre">
+    <div class="text-danger" *ngIf="myForm.get('nombre')?.errors && (myForm.get('nombre')?.dirty || myForm.get('nombre')?.touched)">
+      <p *ngIf="myForm.get('nombre')?.hasError('required')">El campo Nombre es requerido</p>
+    </div>
+  </div>
 
-<p>
-  <span>CUIT:</span>
-  <input type="text" [(ngModel)]="cliente.cuit" placeholder="CUIT">
-</p>
-<p>
-  <span>Dirección:</span>
-  <input type="text" [(ngModel)]="cliente.direccion" placeholder="Dirección">
-</p>
-<p>
-  <label for="selectGrupo">Grupo: </label>
-  <select id="selectGrupo" [(ngModel)]="cliente.grupo">
-    <option *ngFor="let grupo of grupos" value="{{grupo.id}}">{{grupo.nombre}}</option>
-  </select>
-</p>
-<!-- <input type="file" (change)="onFileSelected($event)">
-<button (click)="uploadImage()">Subir imagen</button> -->
-<p>
-  <button (click)="this.nuevoCliente()">Guardar</button>
-</p>
+  <div class="col-lg">
+    <label>CUIT</label>
+    <input formControlName="cuit" type="text" [(ngModel)]="cliente.cuit" placeholder="CUIT">
+    <div class="text-danger" *ngIf="myForm.get('cuit')?.errors && myForm.get('cuit')?.dirty">
+      <p *ngIf="myForm.get('cuit')?.hasError('required')">El campo Cuit es requerido</p>
+      <p *ngIf="myForm.get('cuit')?.hasError('minlength')">El campo Cuit debe ser de 11 dígitos</p>
+      <p *ngIf="myForm.get('cuit')?.hasError('maxlength')">El campo Cuit debe ser de 11 dígitos</p>
+    </div>
+  </div>
+
+  <div class="col-lg">
+    <label>Dirección</label>
+    <input formControlName="direccion" type="text" [(ngModel)]="cliente.direccion" placeholder="Dirección">
+    <div class="text-danger" *ngIf="myForm.get('direccion')?.errors && myForm.get('direccion')?.dirty">
+      <p *ngIf="myForm.get('direccion')?.hasError('required')">El campo Dirección es requerido</p>
+    </div>
+  </div>
+
+  <div class="col-lg">
+    <label for="selectGrupo">Grupo</label>
+    <select formControlName="grupo" id="selectGrupo" [(ngModel)]="cliente.grupo">
+      <option *ngFor="let grupo of grupos" value="{{grupo.id}}">{{grupo.nombre}}</option>
+    </select>
+    <div class="text-danger" *ngIf="myForm.get('grupo')?.errors && myForm.get('grupo')?.dirty">
+      <p *ngIf="myForm.get('grupo')?.hasError('required')">El campo Grupo es requerido</p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Imagen</label>
+    <input formControlName="imagen" type="file" class="form-control" name="imagen" (change)="onChange($event)">
+  </div>
+  <img class="imagen" src={{cliente.imagen}} alt="Imagen de {{cliente.nombre}}">
+
+  <button type="submit" [disabled]="myForm.invalid">Guardar</button>
+</form>
